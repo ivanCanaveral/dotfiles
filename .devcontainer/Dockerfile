@@ -1,0 +1,2 @@
+FROM mcr.microsoft.com/devcontainers/base:jammy
+RUN apt-get update && apt-get install gnupg2 -y

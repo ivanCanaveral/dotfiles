@@ -1,13 +1,14 @@
 # System setup
 
 ## mac os terminal themes:
+
 https://github.com/lysyi3m/macos-terminal-themes
 
 clone the repo and open themes.
 
 ## Fonts
 
-We're using nerd fonts: https://www.nerdfonts.com/font-downloads
+We're using [nerd fonts](https://www.nerdfonts.com/font-downloads)
 
 You can easily download one and install it. Ubuntu mono can be a good option if you're familiar with ubuntu.
 
@@ -67,7 +68,7 @@ ssh-agent
 
 To add keys automatically to the agent and store passphrases in the keychain, we need to configure it. Just add this config to the ssh config file (`~/.ssh/config`):
 
-```
+```bash
 Host github.com
   AddKeysToAgent yes
   UseKeychain yes
@@ -76,13 +77,13 @@ Host github.com
 
 And now we can add the key to the agent:
 
-```bash
+```zsh
 ssh-add --apple-use-keychain ~/.ssh/id_ed25519
 ````
 
 or 
 
-```
+```zsh
 ssh-add -K ~/.ssh/id_ed25519
 ```
 
@@ -101,7 +102,7 @@ Click [here](https://docs.github.com/en/authentication/connecting-to-github-with
 
 Check you have GnuPG installed:
 
-```bash 
+```bash
 gpg version
 ```
 
@@ -170,6 +171,30 @@ git config --list
 
 ## VSCode
 
+### Basic config
+
 #### code command
 
 Install vscode as usual. Once you have it, open it, Ctrl++Shift+P and look for the shell command installation, to open it from terminal.
+
+### Dev containers
+
+#### 0. Requirements
+
+Install Docker and dev containers extension
+
+#### 1. Check installation
+
+There are several ways to test if it is working (sample repos, open a repository o PR, etc). However, in this repo we include a `.devcontainer` folder with the required filest to run a dev container ;)
+
+In you want to sign commits, you must ensure that git and gpg are available within the container. The dev-container extension will manage your keys, making them available inside the container. To validate this, just open a new terminal attached to the container and type:
+
+```bash
+git config --list
+gpg --list-secret-keys --keyid-format=long
+```
+
+#### 2. VS Extension
+
+Common extensions, like themes, can be installed on your local vscode. However, the most convinient way to deal with specific extensiones (linters, spell checkers, etc), is installing them in the container. Yo can declare this in the `devcontainer.json`.
+
